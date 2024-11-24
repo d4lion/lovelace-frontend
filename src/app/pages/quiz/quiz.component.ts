@@ -1,13 +1,19 @@
 import { Component } from '@angular/core';
-import type { Question, Option } from '../../../types/IQuiz';
-import { NgFor, NgIf } from '@angular/common';
+import { Question, Option } from '@type/IQuiz';
+
+interface IAnswers {
+  [key: string]: string | undefined;
+}
+import { CommonModule} from '@angular/common';
+
 import { StepComponent } from '@components/step/step.component';
 import { CardComponent } from '@components/card/card.component';
+import { DialogComponent } from '@components/dialog/dialog.component';
 
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [NgFor, NgIf, StepComponent, CardComponent],
+  imports: [CommonModule, StepComponent, CardComponent, DialogComponent],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css',
 })
@@ -23,11 +29,11 @@ export class QuizComponent {
           description: 'Playa',
         },
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Montaña',
         },
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Ciudad',
         },
       ],
@@ -38,15 +44,15 @@ export class QuizComponent {
       key: 'activity',
       options: [
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Deportes y aventura',
         },
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Cultura y museos',
         },
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Relax y bienestar',
         },
       ],
@@ -54,26 +60,81 @@ export class QuizComponent {
     {
       questionText:
         '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
-      key: 'newActivity2',
+      key: 'housing',
       options: [
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Deportes y aventura',
         },
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Cultura y museos',
         },
         {
-          image: 'https://via.placeholder.com/150',
+          image: '',
           description: 'Relax y bienestar',
         },
       ],
     },
-
+    {
+      questionText:
+        '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
+      key: 'duration',
+      options: [
+        {
+          image: '',
+          description: 'Deportes y aventura',
+        },
+        {
+          image: '',
+          description: 'Cultura y museos',
+        },
+        {
+          image: '',
+          description: 'Relax y bienestar',
+        },
+      ],
+    },
+    {
+      questionText:
+        '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
+      key: 'age',
+      options: [
+        {
+          image: '',
+          description: 'Deportes y aventura',
+        },
+        {
+          image: '',
+          description: 'Cultura y museos',
+        },
+        {
+          image: '',
+          description: 'Relax y bienestar',
+        },
+      ],
+    },
   ];
 
+  isDialogOpen = false;
+  userAnswers: IAnswers[] = [];
   currentQuestionIndex = 0;
+
+  dialogHandler() {
+    console.log(this.isDialogOpen);
+    this.isDialogOpen = !this.isDialogOpen;
+    this.preSubmitQuiz();
+  }
+
+  handleCancelButtonDialog() {
+    this.dialogHandler();
+    this.userAnswers = [];
+  }
+
+  handleSuccessButtonDialog() {
+    this.dialogHandler();
+    this.submitQuiz();
+  }
 
   selectOption(question: Question, option: Option) {
     question.selectedOption = option;
@@ -96,7 +157,11 @@ export class QuizComponent {
     }
   }
 
-  submitQuiz() {
+  preSubmitQuiz() {
+    this.submitQuiz(false);
+  }
+
+  submitQuiz(sendData: boolean = true) {
     // Aquí envías las respuestas al backend
 
     const keys = this.questions.map((question) => question.key);
@@ -105,15 +170,17 @@ export class QuizComponent {
     );
 
     // En este apartado se hace un mapeo de las respuestas para enviarlas al backend
-    const combined = keys.reduce(
-      (acc: { [key: string]: string | undefined }, key, index) => {
-        acc[key] = answers[index];
-        return acc;
-      },
-      {}
-    );
+    const combined: IAnswers = keys.reduce((acc: IAnswers, key, index) => {
+      acc[key] = answers[index];
+      return acc;
+    }, {} as IAnswers);
 
-    console.log('Respuestas:', combined);
+    this.userAnswers.push(combined);
+
+    // Aqui es donde podemos enviar todos los datos al backend
+    if (sendData) {
+      console.log(this.userAnswers);
+    }
   }
 
   /**

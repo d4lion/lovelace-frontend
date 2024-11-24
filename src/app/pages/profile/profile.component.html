@@ -1,1 +1,111 @@
-<p>profile works!</p>
+<div class="flex justify-center items-center h-[85vh] gap-16">
+
+    <div class="carousel-container">
+        <!-- Imagen de usuario -->
+        <div class="image-container">
+            <img [src]="selectedImage" alt="Imagen de usuario" class="user-image">
+        </div>
+    
+        <!-- Contenedor con las flechas a los lados de los puntos -->
+        <div class="carousel-controls">
+            <!-- Flecha izquierda -->
+            <button (click)="previousImage()" class="carousel-arrow">&#60;</button>
+    
+            <!-- Puntos indicadores del carrusel -->
+            <div class="dots-container">
+                <span *ngFor="let image of images; let i = index" [class.active]="image === selectedImage"
+                    (click)="selectImage(image)">
+                    &#8226;
+                </span>
+            </div>
+    
+            <!-- Flecha derecha -->
+            <button (click)="nextImage()" class="carousel-arrow">&#62;</button>
+        </div>
+    
+    
+    </div>
+
+    <div class="flex items-center justify-center">
+            <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="w-80 flex flex-col gap-3 ">
+        
+                <!-- Campo de nombre -->
+                <div class="w-full max-w-sm min-w-[200px]">
+                    <label for="nombre">Nombre</label>
+                    <input autocomplete="off" id="nombre" formControlName="nombre" type="text"
+                        class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                        [class.alert]="userForm.controls['nombre'].invalid && userForm.controls['nombre'].touched"
+                        [class.success]="!userForm.controls['nombre'].invalid && userForm.controls['nombre'].touched" />
+                    <div *ngIf="userForm.controls['nombre'].invalid && userForm.controls['nombre'].touched">
+                        <small *ngIf="userForm.controls['nombre'].hasError('required')" class="text_alert">El nombre es
+                            requerido.</small>
+                    </div>
+                </div>
+        
+                <!-- Campo de email -->
+                <div class="w-full max-w-sm min-w-[200px]">
+                    <label for="email">Email</label>
+                    <input autocomplete="off" id="email" formControlName="email" type="email"
+                        class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                        [class.alert]="userForm.controls['email'].invalid && userForm.controls['email'].touched"
+                        [class.success]="!userForm.controls['email'].invalid && userForm.controls['email'].touched" />
+                    <div *ngIf="userForm.controls['email'].invalid && userForm.controls['email'].touched">
+                        <small *ngIf="userForm.controls['email'].hasError('required')" class="text_alert">El email es
+                            requerido.</small>
+                        <small *ngIf="userForm.controls['email'].hasError('email')" class="text_alert">El email no es
+                            válido.</small>
+                    </div>
+                </div>
+        
+                <!-- Campo de ID -->
+                <div class="w-full max-w-sm min-w-[200px]">
+                    <label for="id">ID</label>
+                    <input autocomplete="off" id="id" formControlName="id" type="text"
+                        class="w-full bg-transparent placeholder:text-slate-400 text-slate-700 text-sm border border-slate-200 rounded-md px-3 py-3 transition duration-300 ease focus:outline-none focus:border-slate-400 hover:border-slate-300 shadow-sm focus:shadow"
+                        [class.alert]="userForm.controls['id'].invalid && userForm.controls['id'].touched"
+                        [class.success]="!userForm.controls['id'].invalid && userForm.controls['id'].touched" />
+                    <div *ngIf="userForm.controls['id'].invalid && userForm.controls['id'].touched">
+                        <small *ngIf="userForm.controls['id'].hasError('required')" class="text_alert">El ID es
+                            requerido. </small>
+                        <small *ngIf="userForm.controls['id'].hasError('pattern')" class="text_alert">El ID debe ser un
+                            número.</small>
+                        <small *ngIf="userForm.controls['id'].hasError('minlength')" class="text_alert">El ID debe ser minimo de
+                            8 caracteres</small>
+                        <br>
+                        <small *ngIf="userForm.controls['id'].hasError('maxlength')" class="text_alert">El ID debe ser maximo de
+                            12 caracteres</small>
+                    </div>
+                </div>
+
+                <!-- Campo de aceptar cookies -->
+                <div class="inline-flex items-center">
+                    <label class="flex items-center cursor-pointer relative" for="check-2">
+                        <input type="checkbox"
+                            class="peer h-5 w-5 cursor-pointer transition-all appearance-none rounded shadow hover:shadow-md border border-slate-300 checked:bg-slate-800 checked:border-slate-800"
+                            id="check-2" 
+                            formControlName="userAcceptCookies"
+                            />
+                        <span
+                            class="absolute text-white opacity-0 peer-checked:opacity-100 top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                            <svg xmlns="http://www.w3.org/2000/svg" class="h-3.5 w-3.5" viewBox="0 0 20 20" fill="currentColor"
+                                stroke="currentColor" stroke-width="1">
+                                <path fill-rule="evenodd"
+                                    d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"
+                                    clip-rule="evenodd"></path>
+                            </svg>
+                        </span>
+                    </label>
+                    <label class="cursor-pointer ml-2 text-slate-600 text-sm" for="check-2">
+                        Acepto los <a class="underline" href="https://amadeus.com/es/politicas/privacy-policy" target="_blank" >terminos y condiciones</a> de la 
+                        politica de tratamiento de datos personales  
+                    </label>
+                </div>
+        
+                <button
+                    class="rounded-md bg-gradient-to-tr from-slate-800 to-slate-700 py-2 px-4 border border-transparent text-center text-sm text-white transition-all shadow-md hover:shadow-lg focus:bg-slate-700 focus:shadow-none active:bg-slate-700 hover:bg-slate-700 active:shadow-none disabled:pointer-events-none disabled:opacity-50 disabled:shadow-none"
+                    type="button" [disabled]="userForm.invalid" (click)="onSubmit()">
+                    Enviar
+                </button>
+            </form>
+    </div>
+</div>

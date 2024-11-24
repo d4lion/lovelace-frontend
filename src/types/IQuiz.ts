@@ -10,3 +10,11 @@ export interface Question {
   options: Option[];
   selectedOption?: Option;
 }
+
+export interface IAnswers {
+  climate: string;
+  activity: string;
+  housing: string;
+  duration: string;
+  age: string;
+}
