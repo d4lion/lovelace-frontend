@@ -1,0 +1,9 @@
+<div class="card-container">
+    <div class="card" [class.flipped]="isFlipped" [class.selected]="isSelected">
+        <img [src]="frontContent" class="card-front">
+
+        <div class="card-back">
+            {{ backContent }}
+        </div>
+    </div>
+</div>

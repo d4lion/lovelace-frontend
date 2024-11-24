@@ -1,0 +1,44 @@
+<div *ngIf="questions.length > 0" class="quiz">
+    <h2 class="quiz__title">{{ questions[currentQuestionIndex].questionText }}</h2>
+    
+    <div class="options">
+                <app-card *ngFor="let option of questions[currentQuestionIndex].options" [frontContent]="option.image"
+                    [backContent]="'Información sobre ' + option.description"
+                    [isSelected]="option === questions[currentQuestionIndex].selectedOption"
+                    (click)="selectOption(questions[currentQuestionIndex], option)">
+                </app-card>
+    </div>
+
+    <div class="quiz__buttons">
+        <button 
+        (click)="nextQuestion()" 
+        [disabled]="!questions[currentQuestionIndex].selectedOption" 
+        [class.disabledButton]="!questions[currentQuestionIndex].selectedOption"
+        *ngIf="currentQuestionIndex + 1 != questions.length"
+        >
+            Siguiente
+        </button>
+
+        <button (click)="submitQuiz()" [disabled]="!questions[currentQuestionIndex].selectedOption"
+            [class.disabledButton]="!questions[currentQuestionIndex].selectedOption"
+            *ngIf="currentQuestionIndex + 1 == questions.length">
+            Confirmar
+        </button>
+
+        <button 
+        (click)="previousQuestion()" 
+        [class.disabledButton]="currentQuestionIndex === 0"
+        [disabled]="currentQuestionIndex === 0" >Anterior</button>
+
+        
+
+
+    </div>
+
+    <div class="steps">
+        <app-step label="Perfil" [isActive]="isStepActive(0)" [isCompleted]="isStepCompleted(0)"></app-step>
+        <app-step *ngFor="let question of questions; let i = index" [label]="i + 1" 
+                    [isActive]="isStepActive(i)" [isCompleted]="isStepCompleted(i)">
+        </app-step>
+    </div>
+</div>

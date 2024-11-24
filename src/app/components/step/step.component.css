@@ -1,0 +1,17 @@
+.step {
+    display: inline-block;
+    padding: 10px 20px;
+    margin: 0 5px;
+    border-radius: 10px;
+    background-color: #b0b0b0;
+    color: white;
+    font-weight: bold;
+}
+
+.step.active {
+    background-color: var(--colorButton);
+}
+
+.step.completed {
+    background-color: var(--colorButton);
+}
