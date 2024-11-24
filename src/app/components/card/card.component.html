@@ -1,9 +1,13 @@
-<div class="card-container">
+<div class="card-container flex flex-col items-center gap-4">
     <div class="card" [class.flipped]="isFlipped" [class.selected]="isSelected">
-        <img [src]="frontContent" class="card-front">
-
+        <img [src]="frontImage" class="card-front">
         <div class="card-back">
             {{ backContent }}
         </div>
+    </div>
+    <div>
+        <p class="text-lg to-blue-950 ">
+            {{ frontContent }}
+        </p>
     </div>
 </div>

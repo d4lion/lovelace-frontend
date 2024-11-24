@@ -8,9 +8,11 @@ import { Component, Input } from '@angular/core';
   styleUrl: './card.component.css',
 })
 export class CardComponent {
+  @Input() frontImage: string = '';
   @Input() frontContent: string = '';
   @Input() backContent: string = '';
   @Input() isSelected: boolean = false;
+
   
   isFlipped = false;
   
