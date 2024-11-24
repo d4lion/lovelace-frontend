@@ -9,7 +9,10 @@
     </div>
 
     <div class="quiz__buttons">
-        <button (click)="nextQuestion()" [disabled]="!questions[currentQuestionIndex].selectedOption"
+        <button (click)="previousQuestion()" [class.disabledButton]="currentQuestionIndex === 0"
+            [disabled]="currentQuestionIndex === 0">Anterior</button>
+        
+            <button (click)="nextQuestion()" [disabled]="!questions[currentQuestionIndex].selectedOption"
             [class.disabledButton]="!questions[currentQuestionIndex].selectedOption"
             *ngIf="currentQuestionIndex + 1 != questions.length">
             Siguiente
@@ -21,8 +24,6 @@
             Confirmar
         </button>
 
-        <button (click)="previousQuestion()" [class.disabledButton]="currentQuestionIndex === 0"
-            [disabled]="currentQuestionIndex === 0">Anterior</button>
 
     </div>
 
