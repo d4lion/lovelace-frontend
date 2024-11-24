@@ -1,0 +1,62 @@
+.carousel-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.image-container {
+    margin-bottom: 20px;
+}
+
+.user-image {
+    width: 250px;
+    height: 250px;
+    border-radius: 50%;
+    object-fit: cover;
+}
+
+.carousel-controls {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.carousel-arrow {
+    background: transparent;
+    border: none;
+    font-size: 24px;
+    color: #007bff;
+    cursor: pointer;
+    padding: 0 10px;
+}
+
+.dots-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.dots-container span {
+    font-size: 30px;
+    color: #ccc;
+    cursor: pointer;
+    padding: 0 5px;
+}
+
+.dots-container span.active {
+    color: #007bff;
+}
+
+.alert {
+    border: 1px solid #ef6f6f;
+    background-color: #ef6f6f31;
+    
+}   
+
+.text_alert {
+    color: #ef6f6f;
+}
+
+.success {
+    border: 1px solid #6fef6f;
+}
