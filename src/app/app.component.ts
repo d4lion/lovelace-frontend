@@ -11,11 +11,8 @@ import { NgxSpinnerComponent } from 'ngx-spinner';
   templateUrl: './app.component.html',
   styleUrl: './app.component.css'
 })
-export class AppComponent implements OnInit {
+export class AppComponent  {
   constructor(private router: Router) { }
-  
-  ngOnInit() {
-    this.router.navigate(['/profile']);
-  }
+
 
 }
