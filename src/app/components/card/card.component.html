@@ -1,8 +1,10 @@
 <div class="card-container flex flex-col items-center gap-4">
     <div class="card" [class.flipped]="isFlipped" [class.selected]="isSelected">
-        <img [src]="frontImage" class="card-front">
+        <img [src]="frontImage" class="card-front object-cover">
         <div class="card-back">
-            {{ backContent }}
+            <p class="text-center px-2">
+                {{ backContent }}
+            </p>
         </div>
     </div>
     <div>

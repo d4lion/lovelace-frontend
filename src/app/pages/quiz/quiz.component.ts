@@ -26,49 +26,24 @@ export class QuizComponent {
       options: [
         {
           image:
-            'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/questions_images/playa_img_q1.jpg',
+            'https://placekitten.com/200/300',
           description: 'Caluroso',
           dato: 'Las playas son el destino perfecto para disfrutar del sol y el mar.',
         },
         {
           image:
-            'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/questions_images/montana_img_q1.jpg',
+            'https://placekitten.com/200/300',
           description: 'Templado',
           dato: 'Las montañas son el destino perfecto para disfrutar de la naturaleza y el aire fresco.',
         },
         {
           image:
-            'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/questions_images/ciudad_img_q1.jpg',
+            'https://placekitten.com/200/300',
           description: 'Frío',
           dato: 'Las ciudades son el destino perfecto para disfrutar de la cultura y la historia.',
         },
       ],
-    },
-    {
-      questionText:
-        '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
-      key: 'activity',
-      options: [
-        {
-          image:
-            'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/questions_images/deporte_aventura_img_q2.jpg',
-          description: 'Deportes y aventuras',
-          dato: 'Las actividades de aventura son perfectas para los amantes de la adrenalina.',
-        },
-        {
-          image:
-            'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/questions_images/museos_img_q2.jpg',
-          description: 'Cultura y museos',
-          dato: 'Los museos son perfectos para los amantes de la historia y la cultura.',
-        },
-        {
-          image:
-            'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/questions_images/relax_bienestar_img_q2.jpg',
-          description: 'Relax y bienestar',
-          dato: 'El relax y el bienestar son perfectos para los amantes de la tranquilidad y la paz.',
-        },
-      ],
-    },
+    }
   ];
 
   isDialogOpen = false;
