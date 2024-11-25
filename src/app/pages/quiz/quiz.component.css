@@ -62,15 +62,27 @@
                     background-color: var(--colorButtonHover);
                 }
             }
+
+            .buttonSuccess {
+                background-color: rgba(36, 175, 75, 0.864) !important;
+
+                &:hover {
+                    background-color: rgb(36, 175, 75) !important;
+                }
+
+            }
     
             .disabledButton {
                 cursor: default;
-                background-color: gray;
+                background-color: gray !important;
     
                 &:hover {
-                    background-color: gray;
+                    background-color: gray !important;
                 }
             }
+
+
+
         }
 }
 

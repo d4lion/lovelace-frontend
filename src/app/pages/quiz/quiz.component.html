@@ -20,7 +20,7 @@
 
         <button (click)="dialogHandler()" [disabled]="!questions[currentQuestionIndex].selectedOption"
             [class.disabledButton]="!questions[currentQuestionIndex].selectedOption"
-            *ngIf="currentQuestionIndex + 1 == questions.length">
+            *ngIf="currentQuestionIndex + 1 == questions.length" class="buttonSuccess">
             Confirmar
         </button>
 
