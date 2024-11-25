@@ -10,6 +10,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { CreateUserService } from '@services/user/create-user.service';
 import { ICreateUserData } from '@type/IUser';
+import { environment } from 'src/env/prod.env';
 
 @Component({
   selector: 'app-profile',
@@ -36,23 +37,21 @@ export class ProfileComponent {
     private createUserService: CreateUserService
   ) {}
 
-  images: string[] = [
-    'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/user_images/avatar_1.png',
-    'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/user_images/avatar_2.png',
-    'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/user_images/avatar_3.png',
-    'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/user_images/avatar_4.png',
-  ];
+  images: Array<string> = environment.user_images
 
   selectedImage: string = this.images[0]; // Inicializamos con la primera imagen
 
   ngOnInit() {
     // Cargar la imagen seleccionada desde localStorage si está disponible
-    const storedImage = localStorage.getItem('avatar');
+    const storedImage: string = localStorage.getItem('avatar')!;
 
     if (storedImage) {
-      this.selectedImage = storedImage;
+      this.selectedImage = this.images[parseInt(storedImage)]; // Cargar la imagen guardada
     } else {
-      localStorage.setItem('avatar', this.selectedImage); // Guardar la imagen por defecto
+      localStorage.setItem(
+        'avatar',
+        `${this.images.indexOf(this.selectedImage)}`
+      ); // Guardar la imagen por defecto
     }
 
     const storedId = sessionStorage.getItem('id');
@@ -138,7 +137,6 @@ export class ProfileComponent {
 
   // Esta función simula el guardado de la URL seleccionada
   saveSelectedImage(image: string) {
-    console.log('Imagen seleccionada: ', image); // Solo para demostración
-    localStorage.setItem('avatar', image); // Almacena en localStorage
+    localStorage.setItem('avatar', `${this.images.indexOf(image)}`); // Almacena en localStorage
   }
 }

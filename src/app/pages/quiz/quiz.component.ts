@@ -4,6 +4,7 @@ import { Question, Option, IBackendData } from '@type/IQuiz';
 import { CommonModule} from '@angular/common';
 import { StepComponent } from '@components/step/step.component';
 import { CardComponent } from '@components/card/card.component';
+import { AnswersService } from '@services/data/answers.service';
 
 
 interface IAnswers {
@@ -19,37 +20,22 @@ interface IAnswers {
   styleUrl: './quiz.component.css',
 })
 export class QuizComponent {
-  questions: Question[] = [
-    {
-      questionText: '¿Que tipo de entorno prefieres para tus vacaciones?',
-      key: 'climate',
-      options: [
-        {
-          image:
-            'https://placekitten.com/200/300',
-          description: 'Caluroso',
-          dato: 'Las playas son el destino perfecto para disfrutar del sol y el mar.',
-        },
-        {
-          image:
-            'https://placekitten.com/200/300',
-          description: 'Templado',
-          dato: 'Las montañas son el destino perfecto para disfrutar de la naturaleza y el aire fresco.',
-        },
-        {
-          image:
-            'https://placekitten.com/200/300',
-          description: 'Frío',
-          dato: 'Las ciudades son el destino perfecto para disfrutar de la cultura y la historia.',
-        },
-      ],
-    }
-  ];
+  questions: Question[] = [];
 
   isDialogOpen = false;
   userAnswers: IAnswers[] = [];
   currentQuestionIndex = 0;
   userId = sessionStorage.getItem('id');
+
+  constructor(private answerService: AnswersService){}
+
+  ngOnInit(): void {
+    this.answerService.getAnswers().subscribe({
+      next: (data) => {
+        this.questions = data;
+      }
+    })
+  }
 
   dialogHandler() {
     console.log(this.isDialogOpen);
