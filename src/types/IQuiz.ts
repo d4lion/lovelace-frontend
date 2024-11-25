@@ -18,3 +18,12 @@ export interface IAnswers {
   duration: string;
   age: string;
 }
+
+export interface IBackendData {
+  user_id: string;
+  climate: string;
+  activity: string;
+  housing: string;
+  duration: string;
+  age: string;
+}
