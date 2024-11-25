@@ -8,6 +8,8 @@
     "paths": {
       "@components/*" : ["src/app/components/*"],
       "@type/*" : ["src/types/*"],
+      "@guards/*" : ["src/app/core/guards/*"],
+      "@services/*" : ["src/app/core/services/*"],
     },
     "strict": true,
     "noImplicitOverride": true,
