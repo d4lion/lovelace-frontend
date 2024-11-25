@@ -46,13 +46,25 @@ export class ProfileComponent {
   
   ngOnInit() {
     // Cargar la imagen seleccionada desde localStorage si está disponible
-    const storedImage = localStorage.getItem('selectedImage');
+    const storedImage = localStorage.getItem('avatar');
+    
     if (storedImage) {
       this.selectedImage = storedImage;
+    } else {
+      localStorage.setItem('avatar', this.selectedImage); // Guardar la imagen por defecto
+    }
+
+    const storedId = sessionStorage.getItem('id');
+
+    if (storedId) {
+      this.router.navigate(['/quiz']);
     }
   }
   
   onSubmit() {
+    sessionStorage.setItem('id', this.userForm.value.id!);
+    sessionStorage.setItem('email', this.userForm.value.email!);
+    sessionStorage.setItem('name', this.userForm.value.nombre!);
     this.router.navigate(['/quiz'])
   }
 
@@ -82,6 +94,6 @@ export class ProfileComponent {
   // Esta función simula el guardado de la URL seleccionada
   saveSelectedImage(image: string) {
     console.log('Imagen seleccionada: ', image); // Solo para demostración
-    localStorage.setItem('selectedImage', image); // Almacena en localStorage
+    localStorage.setItem('avatar', image); // Almacena en localStorage
   }
 }

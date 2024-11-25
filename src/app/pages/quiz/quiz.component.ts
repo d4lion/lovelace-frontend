@@ -1,14 +1,15 @@
 import { Component } from '@angular/core';
-import { Question, Option } from '@type/IQuiz';
+import { Question, Option, IBackendData } from '@type/IQuiz';
+
+import { CommonModule} from '@angular/common';
+import { StepComponent } from '@components/step/step.component';
+import { CardComponent } from '@components/card/card.component';
+import { DialogComponent } from '@components/dialog/dialog.component';
+
 
 interface IAnswers {
   [key: string]: string | undefined;
 }
-import { CommonModule} from '@angular/common';
-
-import { StepComponent } from '@components/step/step.component';
-import { CardComponent } from '@components/card/card.component';
-import { DialogComponent } from '@components/dialog/dialog.component';
 
 @Component({
   selector: 'app-quiz',
@@ -119,6 +120,7 @@ export class QuizComponent {
   isDialogOpen = false;
   userAnswers: IAnswers[] = [];
   currentQuestionIndex = 0;
+  userId = sessionStorage.getItem('id');
 
   dialogHandler() {
     console.log(this.isDialogOpen);
@@ -179,7 +181,19 @@ export class QuizComponent {
 
     // Aqui es donde podemos enviar todos los datos al backend
     if (sendData) {
-      console.log(this.userAnswers);
+      
+      // Esto es un parseo muy heavy pero me dio pereza ver si se puede hacer de otra forma igual funciona
+      const data: IBackendData = JSON.parse(JSON.stringify({
+        user_id: this.userId!,
+        climate: combined['climate']!,
+        activity: combined['activity']!,
+        housing: combined['housing']!,
+        duration: combined["duration"]!,
+        age: combined["age"]!
+      }));
+      
+      // TODO: Aquí se pueden usar los servicios y redireccionadores para enviar los datos al backend y redirigir al usuario a la siguiente página
+      
     }
   }
 
