@@ -2,7 +2,7 @@
     <h2 class="quiz__title">{{ questions[currentQuestionIndex].questionText }}</h2>
     <div class="options">
         <app-card *ngFor="let option of questions[currentQuestionIndex].options" [frontContent]="option.description"
-            [frontImage]="option.image" [backContent]="option.description"
+            [frontImage]="option.image" [backContent]="option.dato"
             [isSelected]="option === questions[currentQuestionIndex].selectedOption"
             (click)="selectOption(questions[currentQuestionIndex], option)">
         </app-card>

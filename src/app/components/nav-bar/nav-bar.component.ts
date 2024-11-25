@@ -1,11 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
+import { environment } from 'src/env/prod.env';
 
 @Component({
   selector: 'app-nav-bar',
   standalone: true,
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule],
   templateUrl: './nav-bar.component.html',
   styleUrl: './nav-bar.component.css',
 })
@@ -36,7 +37,8 @@ export class NavBarComponent implements OnInit {
     this.userName = sessionStorage.getItem('name')!;
     this.userId = sessionStorage.getItem('id')!;
     this.userEmail = sessionStorage.getItem('email')!;
-    this.userAvatar = localStorage.getItem('avatar')!;
+    this.userAvatar =
+      environment.user_images[parseInt(localStorage.getItem('avatar')!)];
   }
 
   checkIfUserWasLoggedIn() {

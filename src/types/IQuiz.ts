@@ -1,7 +1,7 @@
 export interface Option {
     image: string;
     description: string;
-    
+    dato: string;
 }
 
 export interface Question {

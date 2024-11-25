@@ -4,123 +4,38 @@ import { Question, Option, IBackendData } from '@type/IQuiz';
 import { CommonModule} from '@angular/common';
 import { StepComponent } from '@components/step/step.component';
 import { CardComponent } from '@components/card/card.component';
-import { DialogComponent } from '@components/dialog/dialog.component';
+import { AnswersService } from '@services/data/answers.service';
 
 
 interface IAnswers {
   [key: string]: string | undefined;
 }
 
+
 @Component({
   selector: 'app-quiz',
   standalone: true,
-  imports: [CommonModule, StepComponent, CardComponent, DialogComponent],
+  imports: [CommonModule, StepComponent, CardComponent],
   templateUrl: './quiz.component.html',
   styleUrl: './quiz.component.css',
 })
 export class QuizComponent {
-  questions: Question[] = [
-    {
-      questionText: '¿Que tipo de entorno prefieres para tus vacaciones?',
-      key: 'climate',
-      options: [
-        {
-          image:
-            'https://lovelace-amadeus.s3.us-east-1.amazonaws.com/country_img/BoraBora.jpg',
-          description: 'Playa',
-        },
-        {
-          image: '',
-          description: 'Montaña',
-        },
-        {
-          image: '',
-          description: 'Ciudad',
-        },
-      ],
-    },
-    {
-      questionText:
-        '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
-      key: 'activity',
-      options: [
-        {
-          image: '',
-          description: 'Deportes y aventura',
-        },
-        {
-          image: '',
-          description: 'Cultura y museos',
-        },
-        {
-          image: '',
-          description: 'Relax y bienestar',
-        },
-      ],
-    },
-    {
-      questionText:
-        '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
-      key: 'housing',
-      options: [
-        {
-          image: '',
-          description: 'Deportes y aventura',
-        },
-        {
-          image: '',
-          description: 'Cultura y museos',
-        },
-        {
-          image: '',
-          description: 'Relax y bienestar',
-        },
-      ],
-    },
-    {
-      questionText:
-        '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
-      key: 'duration',
-      options: [
-        {
-          image: '',
-          description: 'Deportes y aventura',
-        },
-        {
-          image: '',
-          description: 'Cultura y museos',
-        },
-        {
-          image: '',
-          description: 'Relax y bienestar',
-        },
-      ],
-    },
-    {
-      questionText:
-        '¿Qué tipo de actividades prefieres hacer durante tus vacaciones?',
-      key: 'age',
-      options: [
-        {
-          image: '',
-          description: 'Deportes y aventura',
-        },
-        {
-          image: '',
-          description: 'Cultura y museos',
-        },
-        {
-          image: '',
-          description: 'Relax y bienestar',
-        },
-      ],
-    },
-  ];
+  questions: Question[] = [];
 
   isDialogOpen = false;
   userAnswers: IAnswers[] = [];
   currentQuestionIndex = 0;
   userId = sessionStorage.getItem('id');
+
+  constructor(private answerService: AnswersService){}
+
+  ngOnInit(): void {
+    this.answerService.getAnswers().subscribe({
+      next: (data) => {
+        this.questions = data;
+      }
+    })
+  }
 
   dialogHandler() {
     console.log(this.isDialogOpen);
@@ -181,19 +96,19 @@ export class QuizComponent {
 
     // Aqui es donde podemos enviar todos los datos al backend
     if (sendData) {
-      
       // Esto es un parseo muy heavy pero me dio pereza ver si se puede hacer de otra forma igual funciona
-      const data: IBackendData = JSON.parse(JSON.stringify({
-        user_id: this.userId!,
-        climate: combined['climate']!,
-        activity: combined['activity']!,
-        housing: combined['housing']!,
-        duration: combined["duration"]!,
-        age: combined["age"]!
-      }));
-      
+      const data: IBackendData = JSON.parse(
+        JSON.stringify({
+          user_id: this.userId!,
+          climate: combined['climate']!,
+          activity: combined['activity']!,
+          housing: combined['housing']!,
+          duration: combined['duration']!,
+          age: combined['age']!,
+        })
+      );
+
       // TODO: Aquí se pueden usar los servicios y redireccionadores para enviar los datos al backend y redirigir al usuario a la siguiente página
-      
     }
   }
 
