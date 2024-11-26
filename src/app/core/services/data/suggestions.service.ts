@@ -31,4 +31,12 @@ export class SuggestionsService {
       }
     })
   }
+
+  getUserSuggestions(userId: string | number, callBackSuccess: (data: Suggestion[]) => void) {
+    this.getUserData(userId).subscribe({
+      next: (data) => {
+        callBackSuccess(data.suggestions);
+      },
+    })
+  }
 }
