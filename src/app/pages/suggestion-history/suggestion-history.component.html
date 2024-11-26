@@ -1,0 +1,15 @@
+
+
+
+<div class="flex items-center justify-center h-full w-full">
+    <nav  class="flex flex-col justify-center items-center  gap-2 p-1.5 w-full">
+        <div *ngIf="userSuggestions.length == 0">
+            <h1 class="text-2xl text-blue-950">Aun no tienes sugerencias</h1>
+        </div>
+        <div role="button"
+            *ngFor="let suggestion of userSuggestions"
+            class="text-gray-200 shadow-xl flex w-[50%] items-center rounded-md p-3 transition-all hover:bg-blue-900 focus:bg-blue-800 active:bg-blue-800 bg-blue-950">
+            {{suggestion.america_country.city}} o {{suggestion.europa_country.city}}
+        </div>
+    </nav>
+</div>
