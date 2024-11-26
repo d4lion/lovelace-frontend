@@ -45,8 +45,11 @@
                         <li>
                             <a href="/"
                                 (click)="sigOutUser()"
-                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Sign
-                                out</a>
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Cerrar sesion</a>
+                        </li>
+                        <li>
+                            <a  routerLink="/suggestion/history"
+                                class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 dark:hover:bg-gray-600 dark:text-gray-200 dark:hover:text-white">Historial de sugerencias</a>
                         </li>
                     </ul>
                 </div>
@@ -78,7 +81,7 @@
                         class="block py-2 px-3 md:p-0  rounded text-white hover:text-blue-500">About</a>
                 </li>
                 <li>
-                    <a routerLink="/profile"
+                    <a routerLink="/quiz"
                         routerLinkActive="routeLinkActive"
                         class="block py-2 px-3 md:p-0  rounded text-white hover:text-blue-500">Services</a>
                 </li>
