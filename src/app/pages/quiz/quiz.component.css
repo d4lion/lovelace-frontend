@@ -2,6 +2,7 @@
 
 .options {
     display: flex;
+    flex-wrap: wrap;
     justify-content: space-around;
     gap: 30px;
 }
@@ -45,7 +46,8 @@
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 90%;
+    height: 90vh;
+    
 
 
     &  {
@@ -106,16 +108,9 @@
 
 
 
-@media (max-width: 768px) {
-    .options {
-        display: flex;
-        flex-direction: column;
-        justify-content: space-around;
-        gap: 30px;
-    }
-
+@media (max-width: 1080px) {
     .quiz {
-        height: auto;
+        height: 90%;
     }
 
 }

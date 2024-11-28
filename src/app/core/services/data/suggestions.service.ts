@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { SuggestionResponse } from '@type/ISuggestion';
 import { IUser, Suggestion } from '@type/IUser';
 import { Observable } from 'rxjs';
 import { environment } from 'src/env/prod.env';
@@ -39,4 +40,18 @@ export class SuggestionsService {
       },
     })
   }
+
+  getUserSuggestionById(suggestion_id: string | number): Observable<SuggestionResponse> { 
+    return this.http.get<SuggestionResponse>(`${environment.backendUrl}/${environment.suggestionHistoryPath}/${suggestion_id}`);
+  }
+
+  deleteSuggestionById(suggestion_id: string | number): Observable<any>{ 
+    return this.http.delete(`${environment.backendUrl}/${environment.deleteSuggestionPath}`, {
+      body: {
+        id: suggestion_id.toString()
+      }
+    });
+  }
+
+
 }

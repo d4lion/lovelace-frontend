@@ -16,6 +16,7 @@ export interface IUser {
 }
 
 export interface Suggestion {
+  id: string;
   climate: string;
   activity: string;
   housing: string;
