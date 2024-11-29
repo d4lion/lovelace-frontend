@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
 import { SuggestionsService } from '@services/data/suggestions.service';
+import { GemminiService } from '@services/ia-workers/gemmini.service';
 import { Suggestion } from '@type/IUser';
 import { environment } from 'src/env/prod.env';
 
@@ -16,10 +17,13 @@ export class SuggestionHistoryComponent {
   userSuggestions: Suggestion[] = [];
   userName = sessionStorage.getItem('name');
   isPopUpCopiedOpen = false;
+  isIaSuggestionPopUpOpen = false;
+  dataForIaSuggestionPopUp = ''
 
   constructor(
     private suggestionService: SuggestionsService,
-    private router: Router
+    private router: Router,
+    private gemminiService: GemminiService
   ) {}
 
   onSuggestionClick(suggestion_id: string | number) {
@@ -62,4 +66,23 @@ export class SuggestionHistoryComponent {
   ngOnInit(): void {
     this.getUserSuggestions();
   }
+
+  closePopUpIa() {
+    this.isIaSuggestionPopUpOpen = false
+  }
+
+  testingMethos(
+    city_1: string,
+    contry_1: string,
+    city_2: string,
+    contry_2: string
+  ) {
+    this.isIaSuggestionPopUpOpen = true;
+    this.gemminiService.generateContent(city_1, contry_1, city_2, contry_2).subscribe({
+      next: (data) => {
+        this.dataForIaSuggestionPopUp = data.candidates[0].content.parts[0].text
+      }
+    })
+  }
+
 }
