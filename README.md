@@ -1,6 +1,12 @@
-# LovelaceFrontend
+# ❤ Lovelace Frontend
+This project was focused on creating an attractive frontend for users of our travel suggestion application, seeking to create an optimal and user-friendly interface for each user regardless of their technical level.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.1.1.
+# 🧠 Why project
+This project was part of one of the proposals by Amadeus together with Nodo, to solve one of the most recurrent problems for its clients, which was creating flight and destination suggestions based on the tastes of each of its users.
+
+https://github.com/user-attachments/assets/314aca2c-1c28-412f-bc9b-931e2508bfd5
+
+
 
 ## Development server
 
